@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ria-assignment"
+    }
+  },
+  "defaultProject": "ria-assignment",
+  "cli": {
+    "analytics": "9094f1da-20e9-48ae-83e2-6e222fd590e4"
+  }
 }

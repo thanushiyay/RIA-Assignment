@@ -1,0 +1,48 @@
+<h2>Expected Result</h2>
+
+<div *ngFor="let jsondata of JSONData">
+
+    <div class="contentBlock" *ngFor="let data of getKeys(jsondata)">
+
+        <span class="heading">{{data}} : </span>
+        <ng-container *ngIf="isValue(jsondata[data])">
+            <span class="valueText">{{jsondata[data]}}</span>
+        </ng-container>
+
+        <div *ngIf="!isValue(jsondata[data])">
+            <ng-container *ngTemplateOutlet="arrayTable;context:conToObj(jsondata[data])"></ng-container>
+        </div>
+
+    </div>
+</div>
+
+<ng-template #arrayTable let-obj="obj">
+    <table style="border: 1px solid black">
+        <thead>
+            <tr>
+                <td class="heading" *ngFor="let key of obj">
+                    {{getKeys(key) | camelCase}}
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td *ngFor="let value of obj">
+                    <div *ngIf="isValue(getValues(value)[0])">
+                        {{getValues(value)}}
+                    </div>
+                    <div class="flex-center" *ngIf="!isValue(getValues(value)[0])"
+                        (click)="saveData(getValues(value)[0], getValues(getKeys(value)))">
+                        <img src='../../assets/view-icon.png' width="20px" height="20px">
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</ng-template>
+
+
+<ng-template [ngIf]="viewTable">
+    <h4>{{keyData | camelCase}}</h4>
+    <ng-container *ngTemplateOutlet="arrayTable;context:conToObj(resData)"></ng-container>
+</ng-template>
