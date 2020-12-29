@@ -1,18 +1,14 @@
-<h2>Expected Result</h2>
+<h3>Expected Result</h3>
 
 <div *ngFor="let jsondata of JSONData">
-
     <div class="contentBlock" *ngFor="let data of getKeys(jsondata)">
-
-        <span class="heading">{{data}} : </span>
+        <span class="heading">{{data | camelCase}} : </span>
         <ng-container *ngIf="isValue(jsondata[data])">
-            <span class="valueText">{{jsondata[data]}}</span>
+            <app-form-controller [objectValue]="jsondata[data]"></app-form-controller>
         </ng-container>
-
         <div *ngIf="!isValue(jsondata[data])">
             <ng-container *ngTemplateOutlet="arrayTable;context:conToObj(jsondata[data])"></ng-container>
         </div>
-
     </div>
 </div>
 
@@ -29,7 +25,7 @@
             <tr>
                 <td *ngFor="let value of obj">
                     <div *ngIf="isValue(getValues(value)[0])">
-                        {{getValues(value)}}
+                        <app-form-controller [objectValue]="getValues(value)[0]"></app-form-controller>
                     </div>
                     <div class="flex-center" *ngIf="!isValue(getValues(value)[0])"
                         (click)="saveData(getValues(value)[0], getValues(getKeys(value)))">
@@ -43,6 +39,6 @@
 
 
 <ng-template [ngIf]="viewTable">
-    <h4>{{keyData | camelCase}}</h4>
-    <ng-container *ngTemplateOutlet="arrayTable;context:conToObj(resData)"></ng-container>
+    <div class="heading">{{keyData | camelCase }} :</div>
+    <ng-container *ngTemplateOutlet="arrayTable;context:conToObj(valueData)"></ng-container>
 </ng-template>

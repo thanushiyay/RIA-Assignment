@@ -1,0 +1,22 @@
+<ng-container>
+  <ng-container [ngSwitch]="inputType">
+   
+    <ng-container *ngSwitchCase="'string'">
+      <input type="text" class="form-control" [(ngModel)]="objectValue"/>
+    </ng-container>
+   
+    <ng-container *ngSwitchCase="'number'">
+      <input type="number" class="form-control" [(ngModel)]="objectValue" />
+    </ng-container>
+    
+    <ng-container *ngSwitchCase="'date'">
+      <div class="input-group datePicker">
+        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="dateModal" ngbDatepicker #datePick="ngbDatepicker">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary calendar" (click)="datePick.toggle()" type="button"></button>
+        </div>
+      </div>
+    </ng-container>
+
+  </ng-container>
+</ng-container>

@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   JSONData: Array<any>;
-  resData: any;
+  valueData: any;
   viewTable = false;
   keyData: any;
 
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   }
 
   public saveData(obj, keys) {
-    this.resData = obj;
+    this.valueData = obj;
     this.keyData = keys;
   
     setTimeout(() => {
